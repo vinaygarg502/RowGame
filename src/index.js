@@ -1,13 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'semantic-ui-css/semantic.min.css';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Route, Switch, BrowserRouter } from "react-router-dom";
+import GameForm from './components/GameForm/GameForm';
+import GameLogic from './components/GameLogic/GameLogic';
+
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+    <BrowserRouter>
+       <Switch>
+         <Route exact path="/" component={App} />
+         <Route path="/gameForm" component={GameForm} />
+         <Route path="/gameLogic" component={GameLogic} />
+       </Switch>
+    </BrowserRouter>,
   document.getElementById('root')
 );
 

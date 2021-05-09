@@ -1,0 +1,94 @@
+.gameform-container {
+    width: 800px;
+    margin: 0 auto;
+    border-radius: 30px;
+    background: white;
+    padding: 60px;
+}
+.gameform-input-wrapper{
+    padding-bottom: 40px;
+    border-bottom: 1px solid #707070;
+}
+.gameform-card {
+    display: flex;
+    align-items: center;
+    background: #DCF6E4;
+    padding: 15px;
+    border-radius: 15px;
+    border: 1px solid #70707026;
+    margin-bottom: 10px;
+    width: 100%;
+
+}
+.gameform-card--2{
+    background-color: #F6EFD5;
+}
+.gameform-card--3{
+    background-color: #EFF3FF;
+}
+.img-container {
+    width: 110px;
+    height: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 15px solid #37AC5D;
+    border-radius: 50%;
+    position: relative;
+}
+.gameform-card img {
+    width: 55px;
+    height: auto;
+}
+.gameform-card--2 .img-container{
+    border-color: #F8D146;
+}
+.gameform-card--3 .img-container{
+    border-color: #B1C4F9;
+}
+.form-group {
+    display: flex;
+    flex-direction: column;
+    padding-left: 25px;
+    border-bottom: 1px solid black;
+    flex-grow: 1;
+}
+.form-group label {
+    margin-bottom: 15px;
+    font-size: 18px;
+    line-height: 27px;
+    color: #424242;
+    opacity: 0.6;   
+}
+.form-group input {
+    border: 0;
+    outline: 0;
+    background: transparent;
+    padding-bottom: 10px;
+    font-size: 28px;
+    line-height: 42px;
+    color: #424242;
+    opacity: 1;
+}
+.extraInfo {
+    padding-bottom: 10px;
+    font-size: 28px;
+    line-height: 42px;
+    color: #424242;
+    opacity: 1;  
+}
+.gameform-btn{
+    margin-top: 40px;
+    width: 100%;
+    height: 100px;
+    color: #fff;
+    box-shadow: 0px 3px 6px #00000029;
+    border: 1px solid #70707026;
+    border-radius: 20px;
+    font-size: 32px;
+    line-height: 48px;
+    cursor: pointer;
+}
+.gameform-btn--success {
+    background: #4B7BFF 0% 0% no-repeat padding-box;
+}
