@@ -1,0 +1,47 @@
+
+.board-row {
+    display: flex;
+    flex-grow: 1;
+    width: 80px;
+    height: 80px;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0px 3px 6px #00000040 inset;
+    border: 2px solid white;
+    cursor: pointer;
+}
+.board-row-pl1 {
+    background: #DCF6E4 url('../../assets/avatar01.png') no-repeat center center;
+    background-size: 40px;
+    position: relative;
+}
+.board-row-pl1:before {
+    border: 10px solid #37AC5D;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50%;
+}
+.board-row-pl2 {
+    background: #F6EFD5 url('../../assets/avatar02.png') no-repeat center center;
+    background-size: 40px;
+    position: relative;
+}
+.board-row-pl2:before {
+    border: 10px solid #F8D146;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50%;
+}
+.winner {
+    border:8px solid #FFFF00;
+}

@@ -1,0 +1,32 @@
+.img-container-turn:before {
+    border: 10px solid #FFA200;
+    content: "";
+    position: absolute;
+    top: -25px;
+    left: -25px;
+    right: -25px;
+    bottom: -25px;
+    border-radius: 50%;
+}
+
+.player-info {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-around;
+    color: #424242;
+}
+.player-info > div > p:first-child {
+    margin: 0;
+    margin-top: 0;
+    font-size: 18px;
+    color: #424242;
+    line-height: 27px;
+    opacity: 0.6;
+}
+.player-info > div > p:last-child {
+    margin-bottom: 0;
+    font-size: 28px;
+    line-height: 42px;
+    font-weight: 500;
+    text-align: center;
+}

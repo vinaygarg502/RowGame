@@ -4,7 +4,7 @@ import player1 from '../../assets/avatar01.png';
 import player2 from '../../assets/avatar02.png';
 import winner from '../../assets/winner.png';
 import run from '../../assets/run.png';
-import RadioModal from '../Modal/Modal';
+import RadioModal from '../../components/Modal/Modal';
 import formReducer from '../../reducers/formReducer';
 import { useHistory} from 'react-router-dom';
 

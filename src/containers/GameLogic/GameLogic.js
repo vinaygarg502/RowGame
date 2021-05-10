@@ -1,13 +1,16 @@
 import './GameLogic.css';
 import {useState, useEffect} from 'react';
-import {Button} from 'react-bootstrap';
 import player1st from '../../assets/avatar01.png';
 import player2nd from '../../assets/avatar02.png';
 import { useHistory } from 'react-router-dom';
+import GameRow from '../../components/Row/Row';
+import GameColumn from '../../components/Column/Column';
+import PlayerCard from '../../components/Card/PlayerCard/PlayerCard';
+import GameActions from '../../components/GameActions/GameActions';
 
 const GameLogic = (props)=>{
     let history = useHistory();
-    const {player1,player2, whos, numberOfT} = props.location.state;
+    const {player1='David',player2="Maria", whos="Alternative Turn", numberOfT="5 Games"} = props.location.state || {};
     const gameData = [
         {
             id:1,
@@ -164,45 +167,6 @@ const GameLogic = (props)=>{
             turn:0
         })
     }
-    const updatemodel = (gameState.boardmodel).map((column,i)=>{
-        return (
-            <div className="column1" key={"column"+i}>
-                {
-                    (column.map((row,j)=>{
-                        let className='';
-                        if(row===1){
-                        className = ' row-player1';
-                        } else if(row===2){
-                        className = ' row-player2'; 
-                        }
-                        gameState.winnerCoordinates.forEach(winner=>{
-                            if(winner[0]===i && winner[1]===j){
-                                className+=' winner'
-                            }
-                        });
-                        return (<div className={`row1${className ? className : ''}`} key={"row"+j} onClick={()=>{handleClick(i)}}></div>)
-                    }))
-                }
-            </div>
-        )
-    });
-    const playersInfo = (gameState.gameData).map((playerInfo)=>{
-        return (
-                <div className={`gameform-card${playerInfo.id ===2? ' gameform-card--2' : ''}`} key={playerInfo.id}>
-                    <div className={`img-container${gameState.turn===playerInfo.id ? ' img-container-turn' : ''}`} ><img src ={playerInfo.src} alt={playerInfo.pname}/></div>
-                    <div className="player-info">
-                        <div>
-                            <p>Player 0{playerInfo.id}</p>
-                            <p>{playerInfo.name}</p>
-                        </div>
-                        <div>
-                            <p>Score</p>
-                            <p>0{playerInfo.score}</p>
-                        </div>
-                    </div>
-                </div>
-        )
-    });
     const checkpositiveDiagonal = (coordinates,newBoard,identifier)=>{
         let counter =0;
         let backCounter = 0;
@@ -328,6 +292,31 @@ const GameLogic = (props)=>{
         return false;
     };
 
+    const updatemodel = (gameState.boardmodel).map((column,i)=>{
+        return (
+            <GameColumn key ={`Column`+i}>
+                {column.map((row,j)=>(
+                    <GameRow row={row} 
+                        winnerCoordinates={gameState.winnerCoordinates} 
+                        handleClick={handleClick} 
+                        rowIndex={j} 
+                        columnIndex={i}
+                        key ={`Row`+j}>
+                    </GameRow>
+                ))}
+            </GameColumn>
+        )
+    });
+    const playersInfo = (gameState.gameData).map((playerInfo)=>{
+        return (
+            <PlayerCard 
+                playerInfo = {playerInfo} 
+                turn = {gameState.turn} 
+                key={playerInfo.id}>
+            </PlayerCard>
+        )
+    });
+
     return (
         <div className="main-container">
             <div className="logic-container">
@@ -337,36 +326,25 @@ const GameLogic = (props)=>{
             </div>
             <div className="info-container">
                 <h1> {numberOfT} Tournament</h1>
-                {gameState.winnerCoordinates.length===0 && <p>Playing Game {gameState.currentGame}</p>}
-                {   gameState.winnerCoordinates.length>0 && 
-                    (<div className='winner-container'>
+                {
+                    gameState.winnerCoordinates.length===0 && 
+                    <p>Playing Game {gameState.currentGame}</p>
+                }
+                {   
+                    gameState.winnerCoordinates.length>0 && 
+                    <div className='winner-container'>
                         <h2>Congratulation!</h2>
-                        {!(gameState.tournamentWinner) ? <p>{gameState.winnerName}, you won game {gameState.currentGame}</p>:<p>{gameState.winnerName}, you won tournament</p>}
-                    </div>)
+                        {
+                            !(gameState.tournamentWinner) ? 
+                            <p>{gameState.winnerName}, you won game {gameState.currentGame}</p>:
+                            <p>{gameState.winnerName}, you won tournament</p>
+                        }
+                    </div>
                 }
                 <div className ="card-container">
                     {playersInfo}
                 </div>
-                <div className="btn-container">
-                    {
-                        gameState.winnerCoordinates.length===0 && <Button variant="primary" className="btn-logic">
-                            Undo Step
-                        </Button>
-                    }
-                    {
-                        gameState.winnerCoordinates.length >0 && !gameState.tournamentWinner && <Button variant="primary" className="btn-logic" onClick={startNextGame}>
-                            Next Game
-                        </Button>
-                    }
-                    {
-                        gameState.tournamentWinner && <Button variant="primary" className="btn-logic" onClick={resetGame}>
-                            Play Again
-                        </Button>
-                    }
-                    <Button variant="outline-danger" className="btn-logic" onClick={backToHome}>
-                        End Tournament
-                    </Button>
-                </div> 
+                <GameActions {...gameState} startNextGame={startNextGame} resetGame={resetGame} backToHome={backToHome}></GameActions>
             </div>
         </div>
     )
