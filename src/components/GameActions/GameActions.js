@@ -6,7 +6,7 @@ const GameActions = (props)=>{
     return (
         <div className="btn-container">
         {
-            winnerCoordinates.length===0 && <Button variant="primary" className="btn-logic">
+            winnerCoordinates.length===0 && <Button variant="primary" className="btn-logic" onClick={()=>alert('Coming Soon')}>
                 Undo Step
             </Button>
         }
