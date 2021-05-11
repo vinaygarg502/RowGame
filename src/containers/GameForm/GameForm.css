@@ -4,6 +4,7 @@
     border-radius: 30px;
     background: white;
     padding: 60px;
+    max-width: 800px;
 }
 .gameform-input-wrapper{
     padding-bottom: 40px;
