@@ -1,5 +1,5 @@
 .gameform-container {
-    width: 800px;
+    width: 100%;
     margin: 0 auto;
     border-radius: 30px;
     background: white;
@@ -69,6 +69,7 @@
     line-height: 42px;
     color: #424242;
     opacity: 1;
+    width: 100%;
 }
 .extraInfo {
     padding-bottom: 10px;
@@ -91,4 +92,15 @@
 }
 .gameform-btn--success {
     background: #4B7BFF 0% 0% no-repeat padding-box;
+}
+@media only screen and (max-width: 800px) { 
+    .gameform-container{
+        padding: 20px;
+    }
+    .gameform-input-wrapper{
+        padding-bottom: 20px;
+    }
+    .gameform-btn{
+        margin-top: 20px;
+    }
 }
