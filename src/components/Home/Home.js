@@ -53,7 +53,9 @@ const Home = ()=>{
                     <Icon name='play circle outline' inverted size='big' />
                     PLAY
                     </button>
-                    <div className="game-bg"></div>
+                    <div className="game-bg">
+                        <div></div>
+                    </div>
                 </div>
                 <div className="game-container--options">
                     {gameView}

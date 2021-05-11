@@ -45,3 +45,29 @@
 .winner {
     border:8px solid #FFFF00;
 }
+
+@media only screen and (max-width: 1150px) {
+    .board-row {
+        width: 45px;
+        height: 45px;
+    }
+    .board-row-pl1, .board-row-pl2 {
+        background-size: 20px;
+    }  
+    .board-row-pl1:before,.board-row-pl2:before{
+        border-width: 5px;
+    }
+    .winner {
+        border-width: 4px;
+    }  
+ }
+
+@media only screen and (max-width: 800px) { 
+    .board-row {
+        width: 40px;
+        height: 40px;
+    }
+    .winner {
+        border-width: 3px;
+    }
+}

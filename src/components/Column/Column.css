@@ -6,3 +6,9 @@
     row-gap: 20px;
     flex-direction: column-reverse;
 }
+
+@media only screen and (max-width: 1150px) { 
+    .board-column {
+        row-gap:10px;
+    }
+}

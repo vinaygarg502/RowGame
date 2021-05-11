@@ -1,4 +1,6 @@
 .home {
+    width: 100%;
+    max-width: 800px;
     text-align: center;
     background-color: #CED2DC;
 }
@@ -37,13 +39,11 @@
 .game-container--outer {
     background: #EEE;
     border-radius: 30px;
-    width: 800px;
     border: 1px solid #F7F7F7;
     opacity: 1;
 }
 .game-container--inner {
     padding: 100px 50px 50px 50px;
-    width: 800px;
     margin-bottom: 125px;
     box-shadow: 0px 3px 10px #00000029;
     border: 1px solid #F7F7F7;
@@ -56,17 +56,23 @@
     position: relative;
 }
 .game-bg {
+    flex-grow: 1;
+}
+.game-bg > div {
     background: transparent url('../../assets/4inarow.png') no-repeat right top;
-    background-size: 500px;
+    background-size: 100%;
+    background-position: center right;
     right: -10%;
-    top: -30%;
-    width: 500px;
-    height: 500px;
+    top: -27%;
+    width: 65%;
+    height: calc(100*0.6vw);
+    max-height: 485px;
     position: absolute;
 }
 .play-container {
     padding-left: 65px;
     padding-bottom: 50px;
+    display: flex;
     flex-grow: 1;
     border-bottom: 1px solid #dbdbdb;
 }
@@ -77,3 +83,54 @@
     row-gap: 30px;
     padding-top: 80px;
 }
+
+@media only screen and (max-width: 800px) {
+    .game-header {
+        width: 45%;
+    }
+    .game-header  h1 {
+        font-size: 1.5rem;
+        text-align: left;
+    }
+    .game-header h3 {
+        font-size: 1.2rem;
+    }
+    .game-container--inner {
+        padding: 35px;
+    }
+    .game-bg > div{
+        top: -110px;
+        width: 55%;
+        right: -5%;
+        max-height: 350px;
+        max-width: 380px;
+    }
+    .game-container--options {
+        padding-top: 50px;
+    }
+  }
+
+@media only screen and (max-width: 600px) {
+    .game-header {
+        padding-left: 20px;
+        padding-bottom: 20px;
+    }
+    .game-header  h1 {
+        font-size: 1.2rem;
+        margin-bottom: 5px;
+    }
+    .game-header h3 {
+        font-size: 1rem;
+    }
+    .game-container--inner {
+        padding: 20px;
+    }
+    .game-bg > div{ 
+        top: -90px;
+        width: 55%;
+    }
+    .game-container--options {
+        padding-top: 30px;
+    }
+  }
+

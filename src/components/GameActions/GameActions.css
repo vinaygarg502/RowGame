@@ -13,3 +13,12 @@
     border-radius: 20px;
     padding: 20px;
 }
+@media only screen and (max-width: 800px) { 
+    .btn-container{
+        row-gap: 15px;
+        margin-top:20px;
+    }
+    .btn-logic {
+        padding: 10px;
+    }
+}

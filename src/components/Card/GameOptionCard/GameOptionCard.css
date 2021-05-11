@@ -22,3 +22,16 @@
   .game-option--card-4{
     background: #6E4BFF;
   }
+  @media only screen and (max-width: 800px) {
+    .game-option--card{
+      padding: 21px;
+      column-gap: 10px;
+      font-size: 22px;
+    }
+  }
+  @media only screen and (max-width: 600px) {
+    .game-option--card {
+      flex-basis: 100%;
+      font-size: 35px;
+    }
+  }

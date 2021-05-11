@@ -13,8 +13,8 @@ code {
 }
 #root {
   background: #CED2DC;
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 100%;
 }
