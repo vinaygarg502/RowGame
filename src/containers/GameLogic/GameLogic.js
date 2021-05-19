@@ -71,16 +71,18 @@ const GameLogic = (props)=>{
                 break;
             }
         }
-        winnerCoordinates = checkpositiveDiagonal(coordinates,boardmodel,identifier) 
-        || checknegativeDiagonal(coordinates,boardmodel,identifier) 
-        || checkHorizontal(coordinates,boardmodel,identifier) 
-        || checkVertical(coordinates,boardmodel,identifier);
+        if(identifier){
+            winnerCoordinates = checkpositiveDiagonal(coordinates,boardmodel,identifier) 
+            || checknegativeDiagonal(coordinates,boardmodel,identifier) 
+            || checkHorizontal(coordinates,boardmodel,identifier) 
+            || checkVertical(coordinates,boardmodel,identifier);
 
-        if(winnerCoordinates){
-            executeWinner(winnerCoordinates,identifier,boardmodel);
-        }else{
-            setGameState((prev)=>{return{...prev,boardmodel:boardmodel,turn:identifier===1?2:1}});
-        }  
+            if(winnerCoordinates){
+                executeWinner(winnerCoordinates,identifier,boardmodel);
+            } else{
+                setGameState((prev)=>{return{...prev,boardmodel:boardmodel,turn:identifier===1?2:1}});
+            } 
+        }    
     };
     const startNextGame = ()=>{
         let turn=1;

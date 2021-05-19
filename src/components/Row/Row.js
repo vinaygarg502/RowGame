@@ -5,10 +5,10 @@ const GameRow = (props)=>{
     let style = {};
     if(row===1){
         className = ' board-row-pl1';
-        style  = {...style, 'background-image':`url(${srcArray[0]})`}
+        style  = {...style, backgroundImage:`url(${srcArray[0]})`}
     } else if(row===2){
         className = ' board-row-pl2'; 
-        style  = {...style, 'background-image':`url(${srcArray[1]})`}
+        style  = {...style, backgroundImage:`url(${srcArray[1]})`}
     }
     
     winnerCoordinates.forEach(winner=>{
