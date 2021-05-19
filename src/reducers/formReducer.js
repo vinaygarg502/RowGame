@@ -5,6 +5,16 @@ const formReducer = (state, action) => {
                 ...state,
                 [action.field]: action.payload,
             };
+        case "CHANGE IMAGE":
+            return {
+                ...state,
+                [action.field]: {...state[action.field],imageSrc:action.payload},
+            };
+        case "CHANGE NAME":
+            return {
+                ...state,
+                [action.field]: {...state[action.field],name:action.payload},
+            };
         default:
             return state;
     }

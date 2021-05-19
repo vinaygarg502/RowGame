@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState, useReducer, useRef } from 'react';
 import './GameForm.css';
 import player1 from '../../assets/avatar01.png';
 import player2 from '../../assets/avatar02.png';
@@ -9,14 +9,16 @@ import formReducer from '../../reducers/formReducer';
 import { useHistory} from 'react-router-dom';
 
 const initialFormState = {
-    player1:"",
-    player2:"",
+    player1:{imageSrc:'',name:''},
+    player2:{imageSrc:'',name:''},
     whos:"Alternative Turn",
     numberOfT:"2 Games",
 }
 function GameForm() {
     let history = useHistory();
     //todo has to combine all
+    const imageRef1 = useRef(null);
+    const imageRef2 = useRef(null);
     const [modalShow, setModalShow] = useState(false);
     const [modalData, setModalData] = useState({});
     const [formState, dispatch] = useReducer(formReducer, initialFormState);
@@ -49,22 +51,28 @@ function GameForm() {
             src:player1,
             name:'player1',
             label:'Player 01',
+            ref:imageRef1
         },{
             id:2,
             src:player2,
             name:'player2',
             label:'Player 02',
+            ref:imageRef2
         }
     ];
+    const handleImageModal = (ref)=>{
+        ref.current.click();
+    }
     const playersView = players.map(player=>{
-        const {id,src,name,label}=player;
+        const {id,src,name,label, ref}=player;
         return (
             <div className={`gameform-card${id!==1 ? ' gameform-card--'+id : ''}`} key={id}>
-                <div className="img-container" ><img src ={src} alt={name}/></div>
+                <div className="img-container" ><img src ={id===1 ?(formState.player1.imageSrc || src): (formState.player2.imageSrc || src)} alt={name} onClick={()=>handleImageModal(ref)}/></div>
                 <div className="form-group">
                     <label htmlFor ={name}>{label}</label>
-                    <input type="text" id={name} name={name} onChange={(e) => handleChange(e.target)}/>
+                    <input type="text" id={name} name={name} onChange={(e) =>  onNameChange(e.target)}/>
                 </div>
+                <input type="file" id="file" ref={ref} onChange={(e)=>onFileChange(e, player)} style={{display: "none"}}/>
             </div>
         )
     })
@@ -72,6 +80,7 @@ function GameForm() {
         setModalData(data);
         setModalShow(true);
     }
+   
     const handleChange = (data)=>{
         dispatch(
             {
@@ -82,6 +91,24 @@ function GameForm() {
         )
         setModalShow(false);
     }
+    const onFileChange = (event, data)=>{
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            data.src = e.target.result;
+            dispatch(
+                {
+                    type:'CHANGE IMAGE',
+                    field:data.name,
+                    payload:data.src
+                }
+            )
+        }
+
+        reader.readAsDataURL(event.target.files[0]);
+      
+
+    }
     const onSubmit = (e)=>{
         e.preventDefault();
         history.push({
@@ -89,6 +116,15 @@ function GameForm() {
             state: formState
         });
     }
+    const onNameChange = (data) => {
+        dispatch(
+            {
+                type:'CHANGE NAME',
+                field:data.name,
+                payload:data.value
+            }
+        )
+    };
   return (
     <div className="gameform-container">
         <form onSubmit={(e)=>onSubmit(e)}>

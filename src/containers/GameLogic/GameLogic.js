@@ -1,7 +1,5 @@
 import './GameLogic.css';
 import {useState, useEffect} from 'react';
-import player1st from '../../assets/avatar01.png';
-import player2nd from '../../assets/avatar02.png';
 import { useHistory } from 'react-router-dom';
 import GameRow from '../../components/Row/Row';
 import GameColumn from '../../components/Column/Column';
@@ -10,19 +8,19 @@ import GameActions from '../../components/GameActions/GameActions';
 
 const GameLogic = (props)=>{
     let history = useHistory();
-    const {player1='David',player2="Maria", whos="Alternative Turn", numberOfT="5 Games"} = props.location.state || {};
+    const {player1,player2, whos="Alternative Turn", numberOfT="5 Games"} = props.location.state || {};
     const gameData = [
         {
             id:1,
-            name:player1,
+            name:player1.name,
             score:0,
-            src:player1st
+            src:player1.imageSrc
         },
         {
             id:2,
-            name:player2,
+            name:player2.name,
             score:0,
-            src:player2nd
+            src:player2.imageSrc
         }
     ];
     const [gameState,setGameState] = useState({
@@ -95,13 +93,13 @@ const GameLogic = (props)=>{
         }
         
         if(whos==='Winner First'){
-            if(winnerName===player1){
+            if(winnerName===player1.name){
                 turn=1
             } else{
                 turn=2;
             }
         } else if(whos==='Looser First' || whos==='Alternative Turn'){
-            if(winnerName===player1){
+            if(winnerName===player1.name){
                 turn=2;
             } else{
                 turn=1;
@@ -124,7 +122,6 @@ const GameLogic = (props)=>{
     const resetGame = ()=>{
         let turn=1;
         let boardmodel = generateModel();
-        console.log(gameData);
         if(whos==='Always player 02'){
             turn=2;
         }
@@ -146,9 +143,9 @@ const GameLogic = (props)=>{
 
         gameData[identifier-1].score+=1; 
         if(identifier===1){
-            winnerName = player1;
+            winnerName = player1.name;
         }else{
-            winnerName = player2;
+            winnerName = player2.name;
         }
         const reducer = (accumulator, currentValue)=>accumulator.score + currentValue.score;
         const totalGamesPlayed = gameData.reduce(reducer);
@@ -295,12 +292,15 @@ const GameLogic = (props)=>{
     const updatemodel = (gameState.boardmodel).map((column,i)=>{
         return (
             <GameColumn key ={`Column`+i}>
+                
                 {column.map((row,j)=>(
+                    
                     <GameRow row={row} 
                         winnerCoordinates={gameState.winnerCoordinates} 
                         handleClick={handleClick} 
                         rowIndex={j} 
                         columnIndex={i}
+                        srcArray ={[player1.imageSrc,player2.imageSrc]}
                         key ={`Row`+j}>
                     </GameRow>
                 ))}
